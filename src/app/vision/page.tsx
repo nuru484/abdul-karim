@@ -276,34 +276,6 @@ export default function Vision() {
           </motion.div>
         </div>
       </section>
-
-      {/* Download CTA */}
-      <section className="section-padding bg-primary">
-        <div className="container-custom text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="heading-lg text-primary-foreground mb-6">
-              Get the Full Picture
-            </h2>
-            <p className="body-lg text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
-              Download our comprehensive policy manifesto to learn more about
-              our detailed plans for each area.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="hero" size="lg">
-                <Download className="mr-2" size={18} />
-                Download Manifesto (PDF)
-              </Button>
-              <Button variant="hero-outline" size="lg">
-                Request Printed Copy
-              </Button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
     </>
   );
 }

@@ -1,5 +1,5 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, Variants, Transition } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -38,68 +38,101 @@ const blogPosts = [
   },
 ];
 
-const containerVariants = {
+// Transition typed explicitly to satisfy TS
+const itemTransition: Transition = {
+  duration: 0.6,
+  ease: [0.22, 1, 0.36, 1] as [number, number, number, number], // cubic bezier
+};
+
+const containerVariants: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.12,
     },
   },
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: itemTransition,
+  },
 };
 
 export default function NewsPreview() {
   return (
-    <section className="section-padding bg-muted/50">
-      <div className="container-custom">
-        <SectionHeader
-          label="Latest News"
-          title="Stay Informed"
-          description="Get the latest updates on our campaign, policy announcements, and events happening across the nation."
-        />
+    <section className="relative py-16 sm:py-20 lg:py-24 xl:py-28 bg-linear-to-b from-muted/30 via-muted/50 to-muted/30 overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 right-1/3 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      </div>
+
+      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <div className="mb-12 sm:mb-16 lg:mb-20">
+          <SectionHeader
+            label="Latest News"
+            title="Stay Informed"
+            description="Get the latest updates on our campaign, policy announcements, and events happening across the nation."
+          />
+        </div>
 
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-10 sm:mb-12 lg:mb-16"
         >
           {blogPosts.map((post) => (
             <motion.article
               key={post.id}
               variants={itemVariants}
-              className="group"
+              className="group h-full"
             >
-              <Link href={`/blog/${post.id}`} className="block">
-                <div className="bg-card rounded-3xl overflow-hidden border border-border/50 hover:border-accent/30 hover:shadow-soft-lg transition-all duration-300">
-                  <div className="aspect-16/10 overflow-hidden">
+              <Link href={`/blog/${post.id}`} className="block h-full">
+                <div className="relative bg-card rounded-2xl sm:rounded-3xl overflow-hidden border border-border/50 hover:border-accent/50 shadow-sm hover:shadow-2xl transition-all duration-500 h-full flex flex-col">
+                  {/* Hover gradient effect */}
+                  <div className="absolute inset-0 bg-linear-to-br from-accent/0 via-accent/0 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
+
+                  {/* Image */}
+                  <div className="relative aspect-16/10 overflow-hidden">
                     <img
                       src={post.image}
                       alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                     />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
-                  <div className="p-6">
-                    <div className="flex items-center gap-4 mb-3">
-                      <span className="text-xs font-semibold text-accent uppercase tracking-wider">
+
+                  {/* Content */}
+                  <div className="relative z-20 p-5 sm:p-6 flex-1 flex flex-col">
+                    <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-3">
+                      <span className="inline-block px-3 py-1 text-xs font-semibold text-accent bg-accent/10 rounded-full uppercase tracking-wider">
                         {post.category}
                       </span>
-                      <div className="flex items-center text-muted-foreground text-sm">
-                        <Calendar size={14} className="mr-1" />
-                        {post.date}
+                      <div className="flex items-center text-muted-foreground text-xs sm:text-sm">
+                        <Calendar size={14} className="mr-1.5 shrink-0" />
+                        <span>{post.date}</span>
                       </div>
                     </div>
-                    <h3 className="font-display text-xl font-semibold text-foreground mb-3 group-hover:text-accent transition-colors line-clamp-2">
+
+                    <h3 className="font-display text-lg sm:text-xl font-semibold text-foreground mb-2 sm:mb-3 group-hover:text-accent transition-colors duration-300 line-clamp-2">
                       {post.title}
                     </h3>
-                    <p className="text-muted-foreground body-md line-clamp-2">
+
+                    <p className="text-muted-foreground text-sm sm:text-base leading-relaxed line-clamp-2 flex-1">
                       {post.excerpt}
                     </p>
+
+                    {/* Read more indicator */}
+                    <div className="mt-4 flex items-center text-accent text-sm font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-0 group-hover:translate-x-1">
+                      <span>Read more</span>
+                      <ArrowRight size={16} className="ml-1" />
+                    </div>
                   </div>
                 </div>
               </Link>
@@ -110,13 +143,22 @@ export default function NewsPreview() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center"
         >
-          <Button variant="outline" size="lg" asChild>
-            <Link href="/blog">
+          <Button
+            variant="outline"
+            size="lg"
+            className="group shadow-md hover:shadow-lg transition-all duration-300"
+            asChild
+          >
+            <Link href="/blog" className="flex items-center">
               Read More News
-              <ArrowRight className="ml-2" size={18} />
+              <ArrowRight
+                className="ml-2 transition-transform duration-300 group-hover:translate-x-1"
+                size={18}
+              />
             </Link>
           </Button>
         </motion.div>

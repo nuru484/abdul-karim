@@ -1,13 +1,6 @@
 "use client";
 import Link from "next/link";
-import {
-  Facebook,
-  Twitter,
-  Instagram,
-  Youtube,
-  Mail,
-  Phone,
-} from "lucide-react";
+import { Facebook, Twitter, Instagram, Youtube } from "lucide-react";
 
 const socialLinks = [
   { icon: Facebook, href: "#", label: "Facebook" },
@@ -41,18 +34,6 @@ export default function Footer() {
                 <social.icon size={18} />
               </a>
             ))}
-          </div>
-
-          {/* Contact Info */}
-          <div className="flex flex-col sm:flex-row items-center gap-4 text-primary-foreground/70">
-            <div className="flex items-center gap-2">
-              <Phone size={16} className="text-accent" />
-              <span>+1 (555) 123-4567</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Mail size={16} className="text-accent" />
-              <span>contact@abubakariabdulkarim.com</span>
-            </div>
           </div>
         </div>
       </div>

@@ -9,7 +9,7 @@ export default function HeroSection() {
   return (
     <section className="w-full relative min-h-screen flex items-center bg-primary">
       {/* Content Container */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20 sm:py-24 lg:py-32">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-10 sm:py-16 ">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 xl:gap-20 items-center">
             {/* Text Content */}
