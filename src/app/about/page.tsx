@@ -1,9 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
-import Navbar from "@/components/layout/Navbar";
 import { Button } from "@/components/ui/button";
-import Footer from "@/components/layout/Footer";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowRight,
   Award,
@@ -75,21 +74,21 @@ export default function About() {
   return (
     <>
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-primary">
-        <div className="container-custom">
+      <section className="relative pt-32 pb-16 sm:pb-20 lg:pb-24 bg-linear-to-b from-primary via-primary to-primary/95 overflow-hidden">
+        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="max-w-4xl mx-auto text-center"
           >
-            <span className="inline-block bg-accent/20 text-accent px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
+            <span className="inline-block bg-accent/20 text-accent px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wider mb-4 sm:mb-6">
               About A. Morgan
             </span>
-            <h1 className="heading-xl text-primary-foreground mb-6">
+            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-primary-foreground mb-4 sm:mb-6 leading-tight">
               A Leader Driven by Purpose
             </h1>
-            <p className="body-lg text-primary-foreground/80 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg lg:text-xl text-primary-foreground/80 max-w-2xl mx-auto leading-relaxed">
               A lifetime of service, a vision for the future, and an unwavering
               commitment to the American people.
             </p>
@@ -98,36 +97,45 @@ export default function About() {
       </section>
 
       {/* Biography Section */}
-      <section className="section-padding bg-background">
-        <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+      <section className="relative py-16 sm:py-20 lg:py-24 xl:py-28 bg-background">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 xl:gap-20 items-start">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="sticky top-32"
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              className="lg:sticky lg:top-32"
             >
-              <div className="relative rounded-3xl overflow-hidden">
-                <img
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop"
-                  alt="A. Morgan Portrait"
-                  className="w-full aspect-3/4 object-cover"
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-primary/30 to-transparent" />
+              <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl">
+                <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl h-96 sm:h-112 lg:h-128">
+                  <Image
+                    src="/hero-portrait.jpg"
+                    alt="Abubakari Abdul-Karim - Political Leader"
+                    fill
+                    priority
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-primary/30 via-primary/5 to-transparent" />
+                </div>
+
+                <div className="absolute inset-0 bg-linear-to-t from-primary/30 via-primary/5 to-transparent" />
               </div>
             </motion.div>
 
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             >
-              <h2 className="heading-lg text-foreground mb-6">
-                Full Biography
+              <span className="inline-block text-accent font-semibold text-xs sm:text-sm uppercase tracking-wider mb-3 sm:mb-4">
+                Biography
+              </span>
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4 sm:mb-6 leading-tight">
+                A Story of Service
               </h2>
-              <div className="space-y-6 text-muted-foreground body-md">
+              <div className="space-y-4 sm:space-y-5 text-muted-foreground text-sm sm:text-base lg:text-lg leading-relaxed">
                 <p>
                   Born in a small town to immigrant parents who came to this
                   country with nothing but hope and determination, A. Morgan
@@ -164,33 +172,52 @@ export default function About() {
               </div>
 
               {/* Quote */}
-              <div className="mt-10 p-8 bg-muted/50 rounded-3xl border-l-4 border-accent">
-                <p className="font-display text-xl text-foreground italic mb-4">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.2,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="mt-6 sm:mt-8 lg:mt-10 p-6 sm:p-8 bg-muted/50 rounded-xl sm:rounded-2xl border-l-4 border-accent shadow-lg"
+              >
+                <p className="font-display text-lg sm:text-xl text-foreground italic mb-3 sm:mb-4 leading-relaxed">
                   "Public service is not about personal ambition—it's about the
                   privilege of serving something greater than ourselves. Every
                   decision I make is guided by one simple question: Will this
                   make life better for the people who need it most?"
                 </p>
-                <p className="text-accent font-semibold">— A. Morgan</p>
-              </div>
+                <p className="text-accent font-semibold text-sm sm:text-base">
+                  — A. Karim
+                </p>
+              </motion.div>
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* Timeline Section */}
-      <section className="section-padding bg-muted/50">
-        <div className="container-custom">
+      <section className="relative py-16 sm:py-20 lg:py-24 xl:py-28 bg-linear-to-b from-muted/30 via-muted/50 to-background overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/3 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-1/3 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+        </div>
+
+        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="text-center mb-12 sm:mb-16 lg:mb-20"
           >
-            <span className="inline-block text-accent font-semibold text-sm uppercase tracking-wider mb-3">
+            <span className="inline-block text-accent font-semibold text-xs sm:text-sm uppercase tracking-wider mb-3 sm:mb-4">
               Political Journey
             </span>
-            <h2 className="heading-lg text-foreground">
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
               A Lifetime of Service
             </h2>
           </motion.div>
@@ -199,125 +226,41 @@ export default function About() {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
-            className="max-w-3xl mx-auto"
+            viewport={{ once: true, margin: "-100px" }}
+            className="max-w-4xl mx-auto"
           >
             {timeline.map((item, index) => (
               <motion.div
                 key={item.year}
                 variants={itemVariants}
-                className="relative pl-8 pb-12 last:pb-0"
+                className="relative pl-8 sm:pl-10 pb-10 sm:pb-12 last:pb-0"
               >
                 {/* Timeline Line */}
                 {index !== timeline.length - 1 && (
-                  <div className="absolute left-3.75 top-12 w-0.5 h-full bg-border" />
+                  <div className="absolute left-4 sm:left-5 top-12 w-0.5 h-full bg-border" />
                 )}
 
                 {/* Timeline Dot */}
-                <div className="absolute left-0 top-0 w-8 h-8 rounded-full bg-accent flex items-center justify-center">
-                  <item.icon size={16} className="text-accent-foreground" />
+                <div className="absolute left-0 top-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-accent flex items-center justify-center shadow-lg">
+                  <item.icon
+                    size={18}
+                    className="text-accent-foreground sm:w-5 sm:h-5"
+                  />
                 </div>
 
-                <div className="ml-6 bg-card p-6 rounded-2xl border border-border/50 hover:shadow-soft transition-shadow">
-                  <span className="text-accent font-bold text-lg">
+                <div className="ml-4 sm:ml-6 bg-card/95 backdrop-blur-sm p-5 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl border border-border/50 hover:shadow-xl transition-all duration-300 hover:border-accent/30">
+                  <span className="text-accent font-bold text-base sm:text-lg">
                     {item.year}
                   </span>
-                  <h3 className="font-display text-xl font-semibold text-foreground mt-1 mb-2">
+                  <h3 className="font-display text-xl sm:text-2xl font-semibold text-foreground mt-1 mb-2 sm:mb-3">
                     {item.title}
                   </h3>
-                  <p className="text-muted-foreground">{item.description}</p>
+                  <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+                    {item.description}
+                  </p>
                 </div>
               </motion.div>
             ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Education & Experience */}
-      <section className="section-padding bg-background">
-        <div className="container-custom">
-          <div className="grid md:grid-cols-2 gap-12">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <h3 className="heading-md text-foreground mb-6 flex items-center gap-3">
-                <GraduationCap className="text-accent" />
-                Education
-              </h3>
-              <div className="space-y-6">
-                <div className="bg-card p-6 rounded-2xl border border-border/50">
-                  <h4 className="font-semibold text-foreground">J.D., Law</h4>
-                  <p className="text-muted-foreground">
-                    Harvard Law School, 1992
-                  </p>
-                </div>
-                <div className="bg-card p-6 rounded-2xl border border-border/50">
-                  <h4 className="font-semibold text-foreground">
-                    B.A., Political Science
-                  </h4>
-                  <p className="text-muted-foreground">
-                    State University, 1989
-                  </p>
-                  <p className="text-sm text-accent mt-1">Summa Cum Laude</p>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-            >
-              <h3 className="heading-md text-foreground mb-6 flex items-center gap-3">
-                <Award className="text-accent" />
-                Awards & Recognition
-              </h3>
-              <div className="space-y-4">
-                {[
-                  "TIME 100 Most Influential Leaders",
-                  "Champion of Justice Award",
-                  "Environmental Leadership Medal",
-                  "Small Business Advocate of the Year",
-                  "Veterans Affairs Excellence Award",
-                ].map((award) => (
-                  <div
-                    key={award}
-                    className="flex items-center gap-3 p-4 bg-card rounded-xl border border-border/50"
-                  >
-                    <div className="w-2 h-2 rounded-full bg-accent" />
-                    <span className="text-foreground">{award}</span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="section-padding bg-primary">
-        <div className="container-custom text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="heading-lg text-primary-foreground mb-6">
-              Ready to Learn More?
-            </h2>
-            <p className="body-lg text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
-              Discover the comprehensive policies and vision that will guide our
-              nation forward.
-            </p>
-            <Button variant="hero" size="lg" asChild>
-              <Link href="/vision">
-                Explore Our Vision
-                <ArrowRight className="ml-2" size={18} />
-              </Link>
-            </Button>
           </motion.div>
         </div>
       </section>

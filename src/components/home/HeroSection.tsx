@@ -102,7 +102,7 @@ export default function HeroSection() {
                 <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-3/4">
                   <Image
                     src="/hero-portrait.jpg"
-                    alt="A. Morgan - Political Leader"
+                    alt="Abubakari Abdul-Karim - Political Leader"
                     fill
                     priority
                     className="object-cover"

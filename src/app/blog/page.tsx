@@ -1,5 +1,5 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, Variants, Transition } from "framer-motion";
 import Link from "next/link";
 import { Calendar, ArrowRight, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -16,7 +16,6 @@ const blogPosts = [
     category: "Environment",
     image:
       "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=600&auto=format&fit=crop",
-    featured: true,
   },
   {
     id: 2,
@@ -27,7 +26,6 @@ const blogPosts = [
     category: "Education",
     image:
       "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&auto=format&fit=crop",
-    featured: false,
   },
   {
     id: 3,
@@ -38,7 +36,6 @@ const blogPosts = [
     category: "Economy",
     image:
       "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&auto=format&fit=crop",
-    featured: false,
   },
   {
     id: 4,
@@ -49,7 +46,6 @@ const blogPosts = [
     category: "Healthcare",
     image:
       "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&auto=format&fit=crop",
-    featured: false,
   },
   {
     id: 5,
@@ -60,7 +56,6 @@ const blogPosts = [
     category: "Infrastructure",
     image:
       "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=600&auto=format&fit=crop",
-    featured: false,
   },
   {
     id: 6,
@@ -71,7 +66,6 @@ const blogPosts = [
     category: "Veterans",
     image:
       "https://images.unsplash.com/photo-1569974507005-6dc61f97fb5c?w=600&auto=format&fit=crop",
-    featured: false,
   },
 ];
 
@@ -85,16 +79,28 @@ const categories = [
   "Veterans",
 ];
 
-const containerVariants = {
+// Transition typed explicitly
+const itemTransition: Transition = {
+  duration: 0.6,
+  ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+};
+
+const containerVariants: Variants = {
   hidden: {},
   visible: {
-    transition: { staggerChildren: 0.1 },
+    transition: {
+      staggerChildren: 0.12,
+    },
   },
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: itemTransition,
+  },
 };
 
 export default function Blog() {
@@ -110,26 +116,24 @@ export default function Blog() {
     return matchesCategory && matchesSearch;
   });
 
-  const featuredPost = blogPosts.find((post) => post.featured);
-
   return (
     <>
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-primary">
-        <div className="container-custom">
+      <section className="relative pt-32 pb-16 sm:pb-20 lg:pb-24 bg-linear-to-b from-primary to-primary/95 overflow-hidden">
+        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="max-w-4xl mx-auto text-center"
           >
-            <span className="inline-block bg-accent/20 text-accent px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
+            <span className="inline-block bg-accent/20 text-accent px-4 py-1.5 rounded-full text-sm font-semibold mb-6 uppercase tracking-wider">
               News & Updates
             </span>
-            <h1 className="heading-xl text-primary-foreground mb-6">
+            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6">
               Stay Informed
             </h1>
-            <p className="body-lg text-primary-foreground/80 max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl text-primary-foreground/80 max-w-2xl mx-auto leading-relaxed">
               Get the latest updates on our campaign, policy announcements, and
               events happening across the nation.
             </p>
@@ -137,147 +141,212 @@ export default function Blog() {
         </div>
       </section>
 
-      {/* Featured Post */}
-      {featuredPost && (
-        <section className="section-padding bg-background">
-          <div className="container-custom">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <Link href={`/blog/${featuredPost.id}`} className="group block">
-                <div className="grid lg:grid-cols-2 gap-8 bg-card rounded-3xl overflow-hidden border border-border/50 hover:shadow-soft-xl transition-all duration-300">
-                  <div className="aspect-16/10 lg:aspect-auto overflow-hidden">
-                    <img
-                      src={featuredPost.image}
-                      alt={featuredPost.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+      {/* Main Content with Sidebar */}
+      <section className="relative py-16 sm:py-20 lg:py-24 xl:py-28 bg-linear-to-b from-muted/30 via-muted/50 to-muted/30 overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-1/4 right-1/3 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
+        </div>
+
+        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+          <div className="flex flex-col  lg:items-start lg:flex-row gap-8 lg:gap-12">
+            {/* Left Sidebar - Search & Filter */}
+            <aside className="lg:w-80 shrink-0">
+              <div className="sticky top-24 space-y-6">
+                {/* Search Box */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  className="bg-card rounded-2xl sm:rounded-3xl border border-border/50 p-6 shadow-sm"
+                >
+                  <h3 className="font-display text-lg font-semibold text-foreground mb-4">
+                    Search Articles
+                  </h3>
+                  <div className="relative">
+                    <Search
+                      className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none"
+                      size={18}
+                    />
+                    <Input
+                      type="text"
+                      placeholder="Search..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="pl-11 h-12 rounded-xl border-border/50 focus:border-accent/50 transition-colors"
                     />
                   </div>
-                  <div className="p-8 lg:p-12 flex flex-col justify-center">
-                    <span className="inline-block bg-accent/10 text-accent px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider mb-4 w-fit">
-                      Featured
-                    </span>
-                    <span className="text-xs font-semibold text-accent uppercase tracking-wider">
-                      {featuredPost.category}
-                    </span>
-                    <h2 className="heading-md text-foreground mt-2 mb-4 group-hover:text-accent transition-colors">
-                      {featuredPost.title}
-                    </h2>
-                    <p className="text-muted-foreground body-md mb-6">
-                      {featuredPost.excerpt}
-                    </p>
-                    <div className="flex items-center text-muted-foreground text-sm">
-                      <Calendar size={14} className="mr-2" />
-                      {featuredPost.date}
-                    </div>
+                </motion.div>
+
+                {/* Categories Filter */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{
+                    duration: 0.6,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: 0.1,
+                  }}
+                  className="bg-card rounded-2xl sm:rounded-3xl border border-border/50 p-6 shadow-sm"
+                >
+                  <h3 className="font-display text-lg font-semibold text-foreground mb-4">
+                    Categories
+                  </h3>
+                  <div className="flex flex-col gap-2">
+                    {categories.map((category) => (
+                      <Button
+                        key={category}
+                        variant={
+                          selectedCategory === category ? "default" : "ghost"
+                        }
+                        onClick={() => setSelectedCategory(category)}
+                        className={`justify-start rounded-xl transition-all duration-300 ${
+                          selectedCategory === category
+                            ? "bg-accent text-accent-foreground hover:bg-accent/90"
+                            : "hover:bg-accent/10 hover:text-accent"
+                        }`}
+                      >
+                        {category}
+                      </Button>
+                    ))}
                   </div>
-                </div>
-              </Link>
-            </motion.div>
-          </div>
-        </section>
-      )}
 
-      {/* Search and Filter */}
-      <section className="py-8 bg-background border-b border-border/50">
-        <div className="container-custom">
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-            <div className="relative w-full md:w-80">
-              <Search
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground"
-                size={18}
-              />
-              <Input
-                type="text"
-                placeholder="Search articles..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-11 h-12 rounded-xl"
-              />
-            </div>
-            <div className="flex flex-wrap gap-2 justify-center">
-              {categories.map((category) => (
-                <Button
-                  key={category}
-                  variant={selectedCategory === category ? "accent" : "ghost"}
-                  size="sm"
-                  onClick={() => setSelectedCategory(category)}
-                  className="rounded-full"
-                >
-                  {category}
-                </Button>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+                  {(searchQuery || selectedCategory !== "All") && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => {
+                        setSearchQuery("");
+                        setSelectedCategory("All");
+                      }}
+                      className="w-full mt-4 rounded-xl"
+                    >
+                      Clear Filters
+                    </Button>
+                  )}
+                </motion.div>
 
-      {/* Blog Grid */}
-      <section className="section-padding bg-muted/50">
-        <div className="container-custom">
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
-            {filteredPosts
-              .filter((p) => !p.featured)
-              .map((post) => (
-                <motion.article
-                  key={post.id}
-                  variants={itemVariants}
-                  className="group"
+                {/* Results Count */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{
+                    duration: 0.6,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: 0.2,
+                  }}
+                  className="bg-card rounded-2xl sm:rounded-3xl border border-border/50 p-6 shadow-sm"
                 >
-                  <Link href={`/blog/${post.id}`} className="block h-full">
-                    <div className="bg-card rounded-3xl overflow-hidden border border-border/50 hover:border-accent/30 hover:shadow-soft-lg transition-all duration-300 h-full flex flex-col">
-                      <div className="aspect-16/10 overflow-hidden">
-                        <img
-                          src={post.image}
-                          alt={post.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                      </div>
-                      <div className="p-6 flex flex-col flex-1">
-                        <div className="flex items-center gap-4 mb-3">
-                          <span className="text-xs font-semibold text-accent uppercase tracking-wider">
-                            {post.category}
-                          </span>
-                          <div className="flex items-center text-muted-foreground text-sm">
-                            <Calendar size={14} className="mr-1" />
-                            {post.date}
+                  <p className="text-sm text-muted-foreground">
+                    Showing{" "}
+                    <span className="font-semibold text-foreground">
+                      {filteredPosts.length}
+                    </span>{" "}
+                    {filteredPosts.length === 1 ? "article" : "articles"}
+                  </p>
+                </motion.div>
+              </div>
+            </aside>
+
+            {/* Main Content - Blog Grid */}
+            <div className="flex-1 min-w-0">
+              {filteredPosts.length > 0 ? (
+                <motion.div
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-100px" }}
+                  className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8"
+                >
+                  {filteredPosts.map((post) => (
+                    <motion.article
+                      key={post.id}
+                      variants={itemVariants}
+                      className="group h-full"
+                    >
+                      <Link href={`/blog/${post.id}`} className="block h-full">
+                        <div className="relative bg-card rounded-2xl sm:rounded-3xl overflow-hidden border border-border/50 hover:border-accent/50 shadow-sm hover:shadow-2xl transition-all duration-500 h-full flex flex-col">
+                          {/* Hover gradient effect */}
+                          <div className="absolute inset-0 bg-linear-to-br from-accent/0 via-accent/0 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
+
+                          {/* Image */}
+                          <div className="relative aspect-16/10 overflow-hidden">
+                            <img
+                              src={post.image}
+                              alt={post.title}
+                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                            />
+                            <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                          </div>
+
+                          {/* Content */}
+                          <div className="relative z-20 p-5 sm:p-6 flex-1 flex flex-col">
+                            <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-3">
+                              <span className="inline-block px-3 py-1 text-xs font-semibold text-accent bg-accent/10 rounded-full uppercase tracking-wider">
+                                {post.category}
+                              </span>
+                              <div className="flex items-center text-muted-foreground text-xs sm:text-sm">
+                                <Calendar
+                                  size={14}
+                                  className="mr-1.5 shrink-0"
+                                />
+                                <span>{post.date}</span>
+                              </div>
+                            </div>
+
+                            <h3 className="font-display text-lg sm:text-xl font-semibold text-foreground mb-2 sm:mb-3 group-hover:text-accent transition-colors duration-300 line-clamp-2">
+                              {post.title}
+                            </h3>
+
+                            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed line-clamp-3 flex-1">
+                              {post.excerpt}
+                            </p>
+
+                            {/* Read more indicator */}
+                            <div className="mt-4 flex items-center text-accent text-sm font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-0 group-hover:translate-x-1">
+                              <span>Read more</span>
+                              <ArrowRight size={16} className="ml-1" />
+                            </div>
                           </div>
                         </div>
-                        <h3 className="font-display text-xl font-semibold text-foreground mb-3 group-hover:text-accent transition-colors line-clamp-2">
-                          {post.title}
-                        </h3>
-                        <p className="text-muted-foreground body-md line-clamp-3 flex-1">
-                          {post.excerpt}
-                        </p>
-                        <div className="mt-4 flex items-center text-accent font-medium">
-                          Read More
-                          <ArrowRight
-                            size={16}
-                            className="ml-2 group-hover:translate-x-1 transition-transform"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.article>
-              ))}
-          </motion.div>
-
-          {filteredPosts.length === 0 && (
-            <div className="text-center py-12">
-              <p className="text-muted-foreground">
-                No articles found matching your criteria.
-              </p>
+                      </Link>
+                    </motion.article>
+                  ))}
+                </motion.div>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  className="text-center py-16 sm:py-20"
+                >
+                  <div className="bg-card rounded-2xl sm:rounded-3xl border border-border/50 p-12 max-w-md mx-auto shadow-sm">
+                    <Search
+                      size={48}
+                      className="mx-auto mb-4 text-muted-foreground/50"
+                    />
+                    <h3 className="font-display text-xl font-semibold text-foreground mb-2">
+                      No Articles Found
+                    </h3>
+                    <p className="text-muted-foreground mb-6">
+                      No articles match your current search criteria.
+                    </p>
+                    <Button
+                      variant="outline"
+                      onClick={() => {
+                        setSearchQuery("");
+                        setSelectedCategory("All");
+                      }}
+                      className="rounded-xl"
+                    >
+                      Clear All Filters
+                    </Button>
+                  </div>
+                </motion.div>
+              )}
             </div>
-          )}
+          </div>
         </div>
       </section>
     </>

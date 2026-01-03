@@ -139,77 +139,80 @@ export default function Vision() {
   return (
     <>
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-primary">
-        <div className="container-custom">
+      <section className="relative pt-32 pb-16 sm:pb-20 lg:pb-24 bg-linear-to-b from-primary via-primary to-primary/95 overflow-hidden">
+        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="max-w-4xl mx-auto text-center"
           >
-            <span className="inline-block bg-accent/20 text-accent px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
+            <span className="inline-block bg-accent/20 text-accent px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wider mb-4 sm:mb-6">
               Vision & Policies
             </span>
-            <h1 className="heading-xl text-primary-foreground mb-6">
+            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-primary-foreground mb-4 sm:mb-6 leading-tight">
               A Bold Vision for a Brighter Tomorrow
             </h1>
-            <p className="body-lg text-primary-foreground/80 max-w-2xl mx-auto mb-10">
+            <p className="text-base sm:text-lg lg:text-xl text-primary-foreground/80 max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed">
               Our comprehensive policy platform addresses the challenges facing
               our nation and charts a course toward prosperity, equality, and
               opportunity for all.
             </p>
-            <Button variant="hero" size="lg">
-              <Download className="mr-2" size={18} />
-              Download Full Manifesto
-            </Button>
           </motion.div>
         </div>
       </section>
 
       {/* Vision Statement */}
-      <section className="section-padding bg-background">
-        <div className="container-custom">
+      <section className="relative py-16 sm:py-20 lg:py-24 xl:py-28 bg-background">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="max-w-4xl mx-auto text-center"
           >
-            <h2 className="heading-lg text-foreground mb-8">Our Vision</h2>
-            <p className="font-display text-2xl sm:text-3xl text-foreground leading-relaxed">
-              "We envision an America where every citizen has the opportunity to
-              succeed, where our economy works for working families, and where
-              the promise of the American dream is within reach for{" "}
-              <span className="text-accent">all</span>, not just the privileged
-              few."
+            <span className="inline-block text-accent font-semibold text-xs sm:text-sm uppercase tracking-wider mb-3 sm:mb-4">
+              Our Vision
+            </span>
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6 sm:mb-8 leading-tight">
+              Building Ghana's Future Together
+            </h2>
+            <p className="font-display text-xl sm:text-2xl lg:text-3xl text-foreground leading-relaxed">
+              "We envision a Ghana where every citizen has the opportunity to
+              thrive, where our economy delivers prosperity for ordinary
+              families, and where the promise of national development reaches{" "}
+              <span className="text-accent font-semibold">all</span> Ghanaians,
+              regardless of background or region."
             </p>
-            <div className="mt-8 flex items-center justify-center gap-4">
-              <div className="w-16 h-0.5 bg-accent" />
-              <span className="text-muted-foreground font-semibold">
-                A. Morgan
+            <div className="mt-6 sm:mt-8 flex items-center justify-center gap-3 sm:gap-4">
+              <div className="w-12 sm:w-16 h-0.5 bg-accent" />
+              <span className="text-muted-foreground font-semibold text-sm sm:text-base">
+                A. Karim
               </span>
-              <div className="w-16 h-0.5 bg-accent" />
+              <div className="w-12 sm:w-16 h-0.5 bg-accent" />
             </div>
           </motion.div>
         </div>
       </section>
 
       {/* Policies Section */}
-      <section className="section-padding bg-muted/50">
-        <div className="container-custom">
+      <section className="relative py-16 sm:py-20 lg:py-24 xl:py-28 bg-linear-to-b from-muted/30 via-muted/50 to-background overflow-hidden">
+        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="text-center mb-12 sm:mb-16"
           >
-            <span className="inline-block text-accent font-semibold text-sm uppercase tracking-wider mb-3">
+            <span className="inline-block text-accent font-semibold text-xs sm:text-sm uppercase tracking-wider mb-3 sm:mb-4">
               Our Policies
             </span>
-            <h2 className="heading-lg text-foreground mb-4">
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4 sm:mb-6 leading-tight">
               Comprehensive Solutions for Real Challenges
             </h2>
-            <p className="body-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Click on each policy area to learn more about our detailed plans
               and commitments.
             </p>
@@ -219,49 +222,52 @@ export default function Vision() {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
-            className="max-w-4xl mx-auto"
+            viewport={{ once: true, margin: "-100px" }}
+            className="max-w-5xl mx-auto"
           >
             <Accordion type="single" collapsible className="space-y-4">
               {policies.map((policy) => (
                 <motion.div key={policy.id} variants={itemVariants}>
                   <AccordionItem
                     value={policy.id}
-                    className="bg-card rounded-2xl border border-border/50 overflow-hidden data-[state=open]:shadow-soft-lg transition-shadow"
+                    className="bg-card/95 backdrop-blur-sm rounded-xl sm:rounded-2xl border border-border/50 overflow-hidden data-[state=open]:shadow-xl data-[state=open]:border-accent/30 transition-all duration-300"
                   >
-                    <AccordionTrigger className="px-6 py-6 hover:no-underline group">
-                      <div className="flex items-center gap-4">
+                    <AccordionTrigger className="px-5 sm:px-6 lg:px-8 py-5 sm:py-6 hover:no-underline group">
+                      <div className="flex items-center gap-3 sm:gap-4">
                         <div
-                          className={`w-12 h-12 rounded-xl ${policy.color} flex items-center justify-center`}
+                          className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl ${policy.color} flex items-center justify-center transition-transform duration-300 group-hover:scale-110`}
                         >
-                          <policy.icon size={24} />
+                          <policy.icon className="w-5 h-5 sm:w-6 sm:h-6" />
                         </div>
-                        <div className="text-left">
-                          <h3 className="font-display text-xl font-semibold text-foreground group-hover:text-accent transition-colors">
+                        <div className="text-left flex-1">
+                          <h3 className="font-display text-lg sm:text-xl lg:text-2xl font-semibold text-foreground group-hover:text-accent transition-colors">
                             {policy.title}
                           </h3>
-                          <p className="text-muted-foreground text-sm mt-1 hidden sm:block">
+                          <p className="text-muted-foreground text-xs sm:text-sm mt-1 hidden sm:block leading-relaxed">
                             {policy.summary}
                           </p>
                         </div>
                       </div>
                     </AccordionTrigger>
-                    <AccordionContent className="px-6 pb-6">
-                      <div className="pt-4 border-t border-border/50">
-                        <p className="text-muted-foreground mb-6">
+                    <AccordionContent className="px-5 sm:px-6 lg:px-8 pb-5 sm:pb-6 lg:pb-8">
+                      <div className="pt-4 sm:pt-5 border-t border-border/50">
+                        <p className="text-muted-foreground text-sm sm:text-base mb-5 sm:mb-6 leading-relaxed">
                           {policy.fullDescription}
                         </p>
-                        <h4 className="font-semibold text-foreground mb-4">
+                        <h4 className="font-semibold text-foreground mb-3 sm:mb-4 text-sm sm:text-base">
                           Key Initiatives:
                         </h4>
                         <ul className="space-y-3">
                           {policy.details.map((detail, index) => (
-                            <li key={index} className="flex items-start gap-3">
+                            <li
+                              key={index}
+                              className="flex items-start gap-2 sm:gap-3"
+                            >
                               <CheckCircle
                                 size={18}
-                                className="text-accent mt-0.5 shrink-0"
+                                className="text-accent mt-0.5 shrink-0 sm:w-5 sm:h-5"
                               />
-                              <span className="text-muted-foreground">
+                              <span className="text-muted-foreground text-sm sm:text-base leading-relaxed">
                                 {detail}
                               </span>
                             </li>

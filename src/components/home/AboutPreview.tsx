@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 export default function AboutPreview() {
   return (
@@ -23,11 +24,13 @@ export default function AboutPreview() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="relative order-2 lg:order-1"
           >
-            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden aspect-4/3 shadow-xl">
-              <img
-                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&auto=format&fit=crop"
-                alt="A. Morgan speaking at a community event"
-                className="w-full h-full object-cover"
+            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl h-96 sm:h-112 lg:h-128">
+              <Image
+                src="/hero-portrait.jpg"
+                alt="Abubakari Abdul-Karim - Political Leader"
+                fill
+                priority
+                className="object-cover"
               />
               <div className="absolute inset-0 bg-linear-to-t from-primary/30 via-primary/5 to-transparent" />
             </div>
@@ -49,7 +52,7 @@ export default function AboutPreview() {
                 others."
               </p>
               <p className="mt-2 sm:mt-3 text-xs sm:text-sm text-muted-foreground font-semibold">
-                — A. Morgan
+                — A. Karim
               </p>
             </motion.div>
           </motion.div>
@@ -63,14 +66,14 @@ export default function AboutPreview() {
             className="order-1 lg:order-2"
           >
             <span className="inline-block text-accent font-semibold text-xs sm:text-sm uppercase tracking-wider mb-3 sm:mb-4">
-              About the Candidate
+              About A. Karim
             </span>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4 sm:mb-6 leading-tight">
               A Leader Forged by Experience
             </h2>
             <div className="space-y-3 sm:space-y-4 text-muted-foreground text-sm sm:text-base lg:text-lg leading-relaxed">
               <p>
-                With over 25 years of dedicated public service, A. Morgan has
+                With over 15 years of dedicated public service, A. Karim has
                 been a steadfast advocate for working families, educational
                 reform, and sustainable economic growth.
               </p>
@@ -81,8 +84,8 @@ export default function AboutPreview() {
                 solutions.
               </p>
               <p>
-                As the child of immigrant parents who built their American dream
-                through hard work and determination, Morgan understands the
+                As the child of immigrant parents who built their Ghanaian dream
+                through hard work and determination, Karim understands the
                 values that make our nation great.
               </p>
             </div>
