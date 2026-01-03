@@ -22,7 +22,7 @@ export default function Contact() {
   return (
     <>
       <section className="pt-32 pb-20 bg-primary">
-        <div className="container-custom text-center">
+        <div className="container text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
